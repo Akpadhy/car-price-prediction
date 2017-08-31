@@ -50,6 +50,7 @@ def collect_data(main_url, pages=3):
             if (price_tag == None):
                 continue
             price = int(price_tag.contents[0].replace(' ', ''))
+
             Xy = np.append(Xy, [[year, mileage, capacity, price]], axis=0)
     print('\n')
     return Xy
