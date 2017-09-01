@@ -88,7 +88,7 @@ def main():
     pages = count_pages(url_offers)
     print("\tFound %d pages" % pages)
 
-    Xy = collect_data(url_offers, 2)
+    Xy = collect_data(url_offers, pages)
     print("\tCollected %d samples:" % len(Xy))
     X_train, y_train, X_test, y_test = split_data(Xy, percent_of_test_data)
     print('\t\tTraining samples: %d' % len(X_train))
