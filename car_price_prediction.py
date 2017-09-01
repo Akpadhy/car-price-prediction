@@ -2,13 +2,22 @@ import urllib.request
 
 import numpy as np
 from bs4 import BeautifulSoup
-from enum import Enum
+from sklearn import linear_model
+from sklearn.metrics import r2_score, mean_squared_error
 
+__author__ = "Tomasz Ceszke"
 
-class Capacity(Enum):
-    cap_1_6 = 1598
-    cap_1_9 = 1896
-    cap_2_0 = 1968
+percent_of_test_data = 20
+
+''' SETTINGS '''
+# URL to website with cars offers (should point to the specific model and fuel type like WV Passat B6 Diesel)
+url_offers = 'https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010/?search%5Bfilter_enum_fuel_type%5D%5B0%5D=diesel&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_enum_registered%5D=1&search%5Bcountry%5D='
+# Car(s) to predict price:
+#                                  year, mileage, capacity
+cars_to_predict_price = np.array([[2006, 190000, 1896],
+                                  [2009, 300000, 1968],
+                                  ])
+
 
 def get_html(url):
     html = urllib.request.urlopen(url).read()
@@ -24,7 +33,7 @@ def count_pages(main_url):
 def collect_data(main_url, pages=3):
     Xy = np.empty((0, 4))
     for page in range(1, pages + 1):
-        print('\rParsing page: ' + str(page), end='')
+        print('\r\tParsing page: ' + str(page), end='')
         url = main_url + '&page=' + str(page)
         soup = get_html(url)
         articles = soup.find_all('article')
@@ -44,7 +53,7 @@ def collect_data(main_url, pages=3):
             capacity_tag = article.find("li", attrs={'data-code': 'engine_capacity'})
             if (capacity_tag == None):
                 continue
-            capacity = parse_capacity(int(capacity_tag.span.text.replace(' ', '')[:-3]))
+            capacity = int(capacity_tag.span.text.replace(' ', '')[:-3])
             # price
             price_tag = article.find("span", attrs={'class': 'offer-price__number'})
             if (price_tag == None):
@@ -58,7 +67,6 @@ def collect_data(main_url, pages=3):
 
 def split_data(Xy, percent_of_test_data=30):
     n = len(Xy)
-    # print(Xv[-10:])
     # np.random.shuffle(Xy)
 
     n_train = round((100 - percent_of_test_data) / 100 * n)
@@ -75,12 +83,35 @@ def split_data(Xy, percent_of_test_data=30):
     return X_train, y_train, X_test, y_test
 
 
-def parse_capacity(capacity):
-    if capacity < Capacity.cap_1_9.value:
-        capacity = Capacity.cap_1_6.value
-    elif capacity >= Capacity.cap_1_9.value and capacity < Capacity.cap_2_0.value:
-        capacity = Capacity.cap_1_9.value
-    else:
-        capacity = Capacity.cap_2_0.value
+def main():
+    print("\nCollecting data from %s..." % url_offers[:30])
+    pages = count_pages(url_offers)
+    print("\tFound %d pages" % pages)
 
-    return capacity
+    Xy = collect_data(url_offers, 2)
+    print("\tCollected %d samples:" % len(Xy))
+    X_train, y_train, X_test, y_test = split_data(Xy, percent_of_test_data)
+    print('\t\tTraining samples: %d' % len(X_train))
+    print('\t\tTest samples: %d' % len(X_test))
+
+    print('\nLearning...')
+    regr = linear_model.LinearRegression()
+    regr.fit(X_train, y_train)
+    np.set_printoptions(formatter={'float_kind': '{:f}'.format})
+    print('\tInterceptor: ', regr.intercept_)
+    print('\tCoefficients: ', regr.coef_)
+
+    print('\nTesting...')
+    y_pred = regr.predict(X_test)
+    print("\tMean squared error: %.2f" % mean_squared_error(y_test, y_pred))
+    print('\tVariance score: %.2f' % r2_score(y_test, y_pred))
+
+    print('\nPredicting...')
+    # prices = regr.predict(cars_to_predict_price)
+    for car in cars_to_predict_price:
+        price = regr.predict([car])
+        print('\tThe best price for specified car (year %d, mileage %d, capacity %d) is %.2f PLN' % (car[0], car[1], car[2], price[0][0]))
+
+
+if __name__ == '__main__':
+    main()

@@ -3,17 +3,22 @@ Want to buy or sell a car? What is adequate price? Machine learning to the rescu
 
 [![passat](passat.jpg)](passat_b6_tdi_price_prediction.ipynb) 
 
-This ML algorithm written in Python uses scikit-learn framework to predict adequate price for an iconic Volkswagen Passat B6 TDI.
-As a data source (train&test) it uses offers from Poland's biggest online vehicle marketplace. 
+This Python's script uses linear regression model (scikit-learn) to predict adequate price for a given car.
+As a data source (train&test) it uses real offers from Poland's biggest online vehicle marketplace. 
 
-To predict the best price you will need to give 3 features:
+To predict the best price you will need to specify 3 features:
 * year
 * mileage [km]
 * engine capacity [ccm]  
 
 
+## Demo
+*  [Passat B6 TDI price prediction](passat_b6_tdi_price_prediction.ipynb) 
 
- ## Run
- * Just open this interactive [IPython Notebook file](passat_b6_tdi_price_prediction.ipynb) to check the results for preset values
-  
+## Run
+* Download this [Python script](car_price_prediction.py) and set your values in 'Settings' section
+* Make sure that your environment contains all required libraries (numpy/scipy etc...)
+* Run the script 
+
+ 
  
