@@ -11,7 +11,7 @@ percent_of_test_data = 20
 
 ''' SETTINGS '''
 # URL to website with cars offers (should point to the specific model and fuel type like WV Passat B6 Diesel)
-url_offers = 'https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010/?search%5Bfilter_enum_fuel_type%5D%5B0%5D=diesel&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_enum_registered%5D=1&search%5Bcountry%5D='
+url_offers = 'https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010/?search%5Bfilter_float_price%3Afrom%5D=5000&search%5Bfilter_float_price%3Ato%5D=50000&search%5Bfilter_enum_fuel_type%5D%5B0%5D=diesel&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_enum_rhd%5D=0&search%5Border%5D=filter_float_price%3Aasc&search%5Bcountry%5D='
 # Car(s) to predict price:
 #                                  year, mileage, capacity
 cars_to_predict_price = np.array([[2006, 190000, 1896],
@@ -58,7 +58,7 @@ def collect_data(main_url, pages=3):
             price_tag = article.find("span", attrs={'class': 'offer-price__number'})
             if (price_tag == None):
                 continue
-            price = int(price_tag.contents[0].replace(' ', ''))
+            price = int(float(price_tag.contents[0].replace(' ', '').replace(",",".")))
 
             Xy = np.append(Xy, [[year, mileage, capacity, price]], axis=0)
     print('\n')
@@ -67,7 +67,7 @@ def collect_data(main_url, pages=3):
 
 def split_data(Xy, percent_of_test_data=30):
     n = len(Xy)
-    # np.random.shuffle(Xy)
+    np.random.shuffle(Xy)
 
     n_train = round((100 - percent_of_test_data) / 100 * n)
     n_test = n - n_train

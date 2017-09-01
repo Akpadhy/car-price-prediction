@@ -22,5 +22,8 @@ To predict the best price you will need to specify 3 features:
 * Make sure that your environment contains all required libraries (numpy/scipy etc...)
 * Run the script and have fun!
 
+## Linked resources
+- https://www.desmos.com/calculator/rr4aec66bf
+
  
  
