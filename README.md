@@ -1,4 +1,4 @@
-# passat-b6-tdi
+# Car's price prediction
 Want to buy or sell a car? What is adequate price? Machine learning to the rescue!
 
 [![passat](passat.jpg)](passat_b6_tdi_price_prediction.ipynb) 
