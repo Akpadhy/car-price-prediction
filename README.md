@@ -1,6 +1,9 @@
-# Car price prediction
+# TL;DR
+[Predict a prices of Passat B6 TDI basing on real offer](passat_b6_tdi_price_prediction.ipynb) 
+
 [![passat](passat.jpg)](passat_b6_tdi_price_prediction.ipynb) 
 
+# Car price prediction
 Want to buy or sell a car? What is adequate price? 
 
 *Machine learning to the rescue!*
