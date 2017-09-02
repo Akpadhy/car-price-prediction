@@ -36,7 +36,7 @@ TBD
 1. Have fun!
 
 ## Linked resources
-- [Desmos calculator](https://www.desmos.com/calculator/vhngcjfwlh)
+- [Desmos calculator](https://www.desmos.com/calculator/vhngcjfwlh) for trained model
 
 ![desmos chart](desmos.png)
  
