@@ -1,6 +1,6 @@
 # Car price prediction
 [![passat](passat.jpg)](passat_b6_tdi_price_prediction.ipynb) 
-![prediction chart](prediction.png)
+
 Want to buy or sell a car? What is adequate price? 
 
 *Machine learning to the rescue!*
@@ -14,11 +14,17 @@ To predict the best price you will need to specify 3 features:
 * engine capacity [ccm]  
 
 
+
 ## Demo
 *  [Price prediction of Passat B6 TDI ](passat_b6_tdi_price_prediction.ipynb) - Jupyter notebook
 
+![prediction chart](prediction.png)
+
 
 ## Run
+#### Online
+TBD
+#### Offline
 1. Clone whole repository or download only this [Python script](car_price_prediction.py)
 1. Make sure that your environment contains all required libraries (numpy/scipy etc...)
 1. Prepare an [URL](https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010) that points to the offers of wanted vehicle's model ant put it in 'Settings' section
@@ -29,5 +35,6 @@ To predict the best price you will need to specify 3 features:
 ## Linked resources
 - [Desmos calculator](https://www.desmos.com/calculator/vhngcjfwlh)
 
+![desmos chart](desmos.png)
  
  
