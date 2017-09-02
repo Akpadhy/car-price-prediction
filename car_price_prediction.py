@@ -11,7 +11,7 @@ percent_of_test_data = 20
 
 ''' SETTINGS '''
 # URL to website with cars offers (should point to the specific model and fuel type like WV Passat B6 Diesel)
-url_offers = 'https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010/?search%5Bfilter_float_price%3Afrom%5D=5000&search%5Bfilter_float_price%3Ato%5D=50000&search%5Bfilter_float_year%3Afrom%5D=2005&search%5Bfilter_float_year%3Ato%5D=2010&search%5Bfilter_float_engine_capacity%3Afrom%5D=1500&search%5Bfilter_float_engine_capacity%3Ato%5D=2000&search%5Bfilter_enum_fuel_type%5D%5B0%5D=diesel&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_enum_rhd%5D=0&search%5Border%5D=filter_float_mileage%3Adesc&search%5Bcountry%5D='
+url_offers = 'https://www.otomoto.pl/osobowe/volkswagen/passat/b6-2005-2010/?search%5Bfilter_float_price%3Afrom%5D=5000&search%5Bfilter_float_price%3Ato%5D=50000&search%5Bfilter_float_year%3Afrom%5D=2005&search%5Bfilter_float_year%3Ato%5D=2010&search%5Bfilter_enum_fuel_type%5D%5B0%5D=diesel&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_enum_rhd%5D=0&search%5Border%5D=created_at%3Adesc&search%5Bcountry%5D='
 # Car(s) to predict price:
 #                                  year, mileage, capacity
 cars_to_predict_price = np.array([[2006, 190000, 1896],
@@ -59,6 +59,8 @@ def collect_data(main_url, pages=3):
             if (price_tag == None):
                 continue
             price = int(float(price_tag.contents[0].replace(' ', '').replace(",",".")))
+            if price<0:
+                continue
 
             Xy = np.append(Xy, [[year, mileage, capacity, price]], axis=0)
     print('\n')

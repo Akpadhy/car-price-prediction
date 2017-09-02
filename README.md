@@ -1,6 +1,6 @@
 # Car price prediction
 [![passat](passat.jpg)](passat_b6_tdi_price_prediction.ipynb) 
-
+![prediction chart](prediction.png)
 Want to buy or sell a car? What is adequate price? 
 
 *Machine learning to the rescue!*
@@ -15,7 +15,8 @@ To predict the best price you will need to specify 3 features:
 
 
 ## Demo
-*  [Price prediction of Passat B6 TDI ](passat_b6_tdi_price_prediction.ipynb) 
+*  [Price prediction of Passat B6 TDI ](passat_b6_tdi_price_prediction.ipynb) - Jupyter notebook
+
 
 ## Run
 1. Clone whole repository or download only this [Python script](car_price_prediction.py)
@@ -26,7 +27,7 @@ To predict the best price you will need to specify 3 features:
 1. Have fun!
 
 ## Linked resources
-- https://www.desmos.com/calculator/vhngcjfwlh
+- [Desmos calculator](https://www.desmos.com/calculator/vhngcjfwlh)
 
  
  
