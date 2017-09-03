@@ -21,7 +21,7 @@ To predict the best price you will need to specify 3 features:
 
 
 ## Note
-*Written only for educational purposes. Not for production use.*
+*Written only for educational purposes.*
 
 
 ## Demo
