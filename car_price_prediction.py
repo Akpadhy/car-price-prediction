@@ -7,7 +7,7 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 __author__ = "Tomasz Ceszke"
 
-percent_of_test_data = 20
+percent_of_test_data = 25
 
 ''' SETTINGS '''
 # URL to website with cars offers (should point to the specific model and fuel type like WV Passat B6 Diesel)
